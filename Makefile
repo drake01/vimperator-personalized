@@ -1,6 +1,13 @@
-#### configuration
+DIRS = muttator vimperator xulmus
+TARGETS = clean doc help info xpi
+.SILENT:
 
-VERSION       = 3.3
-NAME          = vimperator
+all: xpi ;
 
-include ../common/Makefile
+$(TARGETS:%=\%.%):
+	echo MAKE $@
+	$(MAKE) -C $* $(@:$*.%=%)
+
+$(TARGETS):
+	$(MAKE) $(DIRS:%=%.$@)
+
